@@ -27,8 +27,9 @@
         <v-chip-group>
           <v-chip v-for="(type, i) in types"
             :key="i"
-            style="pointer-events: none"
             :class="`type-${type.type.name}`"
+            style="pointer-events: none"
+            label
           >
             {{type.type.name}}
           </v-chip>
