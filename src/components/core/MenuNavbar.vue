@@ -27,7 +27,6 @@
 
     <!-- visualização desktop || resoluções maiores -->
     <v-app-bar
-      style="border: 1px solid red !important"
       app
       flat
       :clipped-left="$vuetify.breakpoint.lgAndUp"
