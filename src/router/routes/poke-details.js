@@ -3,13 +3,14 @@ export default [{
   component: () => import('@/views/Index'),
   children: [
     {
-      name: 'pokedex',
-      path: '',
-      component: () => import('@/views/Pokedex'),
+      name: 'pokedex-detalhes',
+      path: 'detalhes/:id',
+      component: () => import('@/views/PokeDetails'),
       meta: {
         requiresAuth: true,
         breadcrumb: [
-          { name: 'Pokédex' }
+          { name: 'Pokédex' },
+          { name: 'Detalhes' }
         ]
       },
     },

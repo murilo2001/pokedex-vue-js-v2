@@ -1,8 +1,8 @@
 <template>
   <v-container fluid grid-list-md>
     <v-layout row wrap>
-        <v-flex v-for="(name, i) in items" :key="i" xs12 sm4 md3 lg3 v-bind="lgBreakPoint">
-            <poke-card :number="zeroPad(i+1)" :name="name" />
+        <v-flex v-for="item in items" :key="item.id" xs12 sm4 md3 lg3 v-bind="lgBreakPoint">
+          <poke-card :number="item.id" :name="item.name" />
         </v-flex>
     </v-layout>
     <v-layout v-if="items.length < countPokemons">
@@ -28,7 +28,6 @@ export default {
 
   data: () => ({
     page: 1,
-    itensPerPage: 43,
     items: [],
     countPokemons: 0,
     loading: false
@@ -53,7 +52,7 @@ export default {
 
   methods: {
     /**
-     * Setá na várivel items array contendo o nome do todos pokemons da página atual (this.page)
+     * Setá na várivel items um array contendo os nomes e id do todos pokemons de acordo com a página atual -> (this.page)
      */
     getPokemons() {
       this.loading = true;
@@ -63,18 +62,15 @@ export default {
         this.countPokemons = response.data.count;
         let rData = response.data.results;
         
-        let arrNames = rData.map(pokemon => pokemon['name']);
-        this.items = this.items.concat(arrNames);
+        let arrInfo = rData.map(pokemon => {
+          pokemon['id'] = pokemon.url.replace('https://pokeapi.co/api/v2/pokemon/', '').slice(0, -1);
+          return pokemon;
+        });
+
+        this.items = this.items.concat(arrInfo);
       })
       .catch(() => this.$toast.error('Erro ao recuperar pokemons.', '',{position:'topRight'}))
       .finally(this.loading = false);
-    },
-
-    /**
-     * Adiciona zeros a esquerda do número
-     */
-    zeroPad(num) {
-      return num.toString().padStart(3, "0");
     }
   }
 }

@@ -1,9 +1,12 @@
 import pokedex from './pokedex';
+import pokeDetails from './poke-details';
+
 
 let routes = [];
 
 routes = routes.concat(
-  pokedex
+  pokedex,
+  pokeDetails
 );
 
 routes.push({ 

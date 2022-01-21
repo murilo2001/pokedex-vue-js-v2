@@ -4,8 +4,9 @@
       class="mx-auto my-4 cursor-pointer"
       :class="{ 'on-hover-poke-card': hover }"
       :elevation="hover ? 12 : 3"
-      max-width="280"
       :loading="loading"
+      max-width="280"
+      @click="$router.push(`detalhes/${number}`)"
     >
       <template slot="progress">
         <v-progress-linear
@@ -20,7 +21,7 @@
         :src="urlImagePoke"
       />
       <div class="ml-4">
-        <v-label>Nº{{number}}</v-label>
+        <v-label>Nº{{number | formatZeroPad}}</v-label>
       </div>
       <v-card-title>{{name}}</v-card-title>
       <v-card-text>
@@ -79,6 +80,15 @@ export default {
       })
       .catch(() => this.$toast.error('Erro ao recuperar informações do pokemon.', '',{position:'topRight'}))
       .finally(this.loading = false);
+    }
+  },
+
+  filters: {
+    /**
+     * Adiciona zeros a esquerda do número
+     */
+    formatZeroPad(number) {
+      return number.toString().padStart(3, "0");
     }
   }
 }
