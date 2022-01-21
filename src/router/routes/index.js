@@ -1,15 +1,15 @@
-import home from './home';
+import pokedex from './pokedex';
 
 let routes = [];
 
 routes = routes.concat(
-  home
+  pokedex
 );
 
 routes.push({ 
   path: '/', 
   redirect: { 
-    name: 'Home' 
+    name: 'Pokedex' 
   } 
 });
 

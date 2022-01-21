@@ -1,9 +1,9 @@
 import APIService from '@/services/APIService.js'; 
 
 export default {
-  getPokemons(pagina = 1, itensPorPagina = 20) {
-    let offsetValue = itensPorPagina * pagina;
-    return APIService.apiCall().get(`/pokemon?limit=${itensPorPagina}&offset=${offsetValue}`);
+  getPokemons(page = 1, itensPerPage = 24) {
+    let offsetValue = itensPerPage * page;
+    return APIService.apiCall().get(`/pokemon?limit=${itensPerPage}&offset=${offsetValue}`);
   },
   getPokemonInfo(nome) {
     return APIService.apiCall().get(`/pokemon/${nome}`);
