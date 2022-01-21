@@ -5,6 +5,16 @@
             <poke-card :number="zeroPad(i+1)" :name="name" />
         </v-flex>
     </v-layout>
+    <v-layout v-if="items.length < countPokemons">
+        <v-btn
+          class="ma-3 white--text mx-auto"
+          color="blue-grey darken-1"
+          :loading="loading"
+          @click="page++, getPokemons()"
+        >
+          Carregar mais Pokémons
+      </v-btn>
+      </v-layout>
   </v-container>
 </template>
 
@@ -18,7 +28,10 @@ export default {
 
   data: () => ({
     page: 1,
-    items: []
+    itensPerPage: 43,
+    items: [],
+    countPokemons: 0,
+    loading: false
   }),
 
   created() {
@@ -43,12 +56,18 @@ export default {
      * Setá na várivel items array contendo o nome do todos pokemons da página atual (this.page)
      */
     getPokemons() {
+      this.loading = true;
+  
       PokeAPIService.getPokemons(this.page)
       .then(response => {
+        this.countPokemons = response.data.count;
         let rData = response.data.results;
-        this.items = rData.map(pokemon => pokemon['name']);
+        
+        let arrNames = rData.map(pokemon => pokemon['name']);
+        this.items = this.items.concat(arrNames);
       })
       .catch(() => this.$toast.error('Erro ao recuperar pokemons.', '',{position:'topRight'}))
+      .finally(this.loading = false);
     },
 
     /**
@@ -57,6 +76,6 @@ export default {
     zeroPad(num) {
       return num.toString().padStart(3, "0");
     }
-  },
+  }
 }
 </script>

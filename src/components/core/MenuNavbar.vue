@@ -86,10 +86,6 @@ export default {
     drawer: null,
     barItems: [
       {
-        title: "Inicio",
-        to: "/",
-      },
-      {
         title: "Pokédex",
         to: "/pokedex",
       },

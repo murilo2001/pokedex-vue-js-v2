@@ -1,11 +1,11 @@
 <template>
   <v-hover v-slot="{ hover }">
     <v-card
-      :loading="loading"
       class="mx-auto my-4 cursor-pointer"
       :class="{ 'on-hover-poke-card': hover }"
       :elevation="hover ? 12 : 3"
       max-width="280"
+      :loading="loading"
     >
       <template slot="progress">
         <v-progress-linear
@@ -57,7 +57,6 @@ export default {
   data: () => ({
     urlImagePoke: '',
     types: {},
-
     loading: false
   }),
 

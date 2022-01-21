@@ -1,15 +1,15 @@
 export default [{
-  path: '/home',
+  path: '/pokedex',
   component: () => import('@/views/Index'),
   children: [
     {
-      name: 'Home',
+      name: 'Pokedex',
       path: '',
-      component: () => import('@/views/Home'),
+      component: () => import('@/views/Pokedex'),
       meta: {
         requiresAuth: true,
         breadcrumb: [
-          { name: 'Dashboard' }
+          { name: 'Pokedex' }
         ]
       },
     },
